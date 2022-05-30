@@ -14,11 +14,11 @@ final class VisitService
         /**
          * @var Visit $visit
          */
-        $visit = Visit::updateOrCreate([
-            'url' => $url
-        ], [
+        $visit = Visit::upsert([
             'url' => $url,
             'last_visit_at' => Carbon::parse($time)
+        ],[
+            'url' => $url
         ]);
 
         $visit->increment('views');
